@@ -36,3 +36,21 @@ h <- h[,c("cover","value","count")]
 names(h)<- c("Cover","ID","Count")
 
 
+#########################################################################
+#Pruebas para organizar los datos
+###################################################################
+
+resume <- data.frame(ID = seq(1:length(k)), Count = 0)   #Prepara la tabla resumen con una columna de IDs por cada tipo de suelo según k
+#y otra columna Count para ir asignando los valores de otros dataframes
+
+resume$Count <- merge(resume, h, by = "ID", suffixes = c("_A", "_B"), all.x = TRUE)$Count_B #Combina ambos dataframe en base al ID,
+#dejando el/los faltante/s como NA y los valores de Count de h ordenados los asigna a la columna Count de la tabla resumen
+
+resume$Count[is.na(resume$Count)] <- 0 #Reemplaza los NA por 0
+
+resume
+
+
+
+
+
