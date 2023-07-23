@@ -22,20 +22,17 @@ k<-c("Cursos y cuerpos de agua",
      "Praderas, pastizales y cultivos anuales",
      "Praderas y pastizales siempreverdes",
      "Suelo desnudo y sectores desprovistos de vegetación",
-     "Turberas ",
+     "Turberas",
      "Superficies impermeables",
-     "Plantación cosechada ")
+     "Plantación cosechada")
 
 ###############################################################################
 #funcion
 ###############################################################################
 z<-crop(x,y)
-j<-terra::freq(z)
-j<-j[,2]
-d <- data.frame(id=1:length(k), cover=k)
-levels(z) <- d
-h<-terra::freq(z)
-h[,4]<-j
-colnames(h)<-c("layer","Name","Count","ID")
-h[,-1]
+h<-terra::freq(z, bylayer=F)
+h$cover <- k[h$value]
+h <- h[,c("cover","value","count")]
+names(h)<- c("Cover","ID","Count")
+
 
