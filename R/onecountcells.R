@@ -1,7 +1,7 @@
 #########################################################################
 # 'x'  :  categorical raster
 # 'category'  :  names categorys example:"k=c("a","b","c"), if you dont have
-#         default "k=NULL"
+#         default "category=NULL"
 #########################################################################
 #########################################################################
 onecountcells <- function(x,category=NULL) {
