@@ -3,6 +3,7 @@
 # 'category'  :  names categorys example:"category=c("a","b","c"), if you dont have
 #         default "category=NULL"
 #########################################################################
+#package required "terra"
 #########################################################################
 onecountcells <- function(x,category=NULL) {
   if (is.null(category)) {
