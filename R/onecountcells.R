@@ -1,6 +1,6 @@
 #########################################################################
 # 'x'  :  categorical raster
-# 'category'  :  names categorys example:"k=c("a","b","c"), if you dont have
+# 'category'  :  names categorys example:"category=c("a","b","c"), if you dont have
 #         default "category=NULL"
 #########################################################################
 #########################################################################
