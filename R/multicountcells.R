@@ -1,6 +1,7 @@
 #########################################################################
 # 'x1'  :  vector of categorical rasters x=c(x1,x2,x3)
-# 'y'  :  vector of polygons  y=c(y1,y2,y3)
+# 'y'  :  vector of polygons  y=c(y1,y2,y3), If you only need 1 polygon, you also
+#         need to introduce it as a collection of vectors ex: y=c(y1).
 # 'category'  :  names category example:"category=c("a","b","c"), if you dont have
 #         default "category=NULL"
 #'ID1'  :  ID1 category example:"ID=c(1,2,3), if you dont have
