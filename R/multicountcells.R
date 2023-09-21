@@ -69,6 +69,13 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
     if (!is.null(ID1)) {resume[,1]<-ID1}
     z1<-resume
     variation0<-rep(0, length(t(z1[3])))
+    
+    ##
+    z3<-z1[3]
+    variation0 <- ifelse(is.na(z3), NA, 0)
+    colnames(variation0) <- c("variation0")
+    ##
+    
     resume <- cbind(z1[,1:3], variation0, z1[, 4:(length(z1))])
     resume_list[[z]] <- resume
   } else {     
@@ -125,6 +132,11 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
     if (!is.null(ID1)) {resume[,1]<-ID1}
     z1<-resume
     variation0<-rep(0, length(t(z1[3])))
+    ##
+    z3<-z1[3]
+    variation0 <- ifelse(is.na(z3), NA, 0)
+    colnames(variation0) <- c("variation0")
+    ##
     resume <- cbind(z1[,1:4], variation0, z1[, 5:(length(z1))])
     resume_list[[z]] <- resume
   
@@ -133,5 +145,4 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
   resume_list
 
   
-}
 }
