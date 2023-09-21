@@ -1,7 +1,6 @@
 #########################################################################
 # 'x1'  :  vector of categorical rasters x=c(x1,x2,x3)
-# 'y'  :  vector of polygons  y=c(y1,y2,y3), If you only need 1 polygon, you also
-#         need to introduce it as a collection of vectors ex: y=c(y1).
+# 'y'  :  vector of polygons  y=c(y1,y2,y3)
 # 'category'  :  names category example:"category=c("a","b","c"), if you dont have
 #         default "category=NULL"
 #'ID1'  :  ID1 category example:"ID=c(1,2,3), if you dont have
@@ -32,7 +31,7 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
     variablecompleta <- merge(resume, h, by = "ID", suffixes = c("_A", "_B"), all.x = TRUE)
     resume[[new_col_name]]<-variablecompleta[,3]
     resume$Percentage1<-variablecompleta[,4]
-    resume$Hect1<-round((xha[,2]/100)*resume[,3],2)
+    resume$Hect1<-round((xha[,2]/100)*resume[,3],4)
     ################################################################################
     
     ################################################################################
@@ -47,7 +46,7 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
     resume[[new_col_name]]<-variablecompleta[,5]
     resume$Percentage2<-variablecompleta[,6]
     resume$variation1<-round((resume[,5]-resume[,2])*100/resume[,2],2)
-    resume$Hect2<-round((xha[,2]/100)*resume[,6],2)
+    resume$Hect2<-round((xha[,2]/100)*resume[,6],4)
     ################################################################################
     #Ciclos automaticos >3
     ################################################################################
@@ -65,9 +64,12 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
       variation <- paste0("variation",(i-1))
       resume[variation]<-round(((resume[,(ncol(resume)-1)])-(resume[,(ncol(resume)-5)]))*100/(resume[,(ncol(resume)-5)]),2)
       hect1 <- paste0("hect",i)
-      resume[hect1]<-round((xha[,2]/100)*resume[,(ncol(resume)-1)],2)
+      resume[hect1]<-round((xha[,2]/100)*resume[,(ncol(resume)-1)],4)
     }
     if (!is.null(ID1)) {resume[,1]<-ID1}
+    z1<-resume
+    variation0<-rep(0, length(t(z1[3])))
+    resume <- cbind(z1[,1:3], variation0, z1[, 4:(length(z1))])
     resume_list[[z]] <- resume
   } else {     
     ################################################################################
@@ -85,7 +87,7 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
     variablecompleta <- merge(resume, h, by = "ID", suffixes = c("_A", "_B"), all.x = TRUE)
     resume[[new_col_name]]<-variablecompleta[,4]
     resume$Percentage1<-variablecompleta[,5]
-    resume$Hect1<-round((xha[,2]/100)*resume[,4],2)
+    resume$Hect1<-round((xha[,2]/100)*resume[,4],4)
     ################################################################################
     
     ################################################################################
@@ -100,7 +102,7 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
     resume[[new_col_name]]<-variablecompleta[,6]
     resume$Percentage2<-variablecompleta[,7]
     resume$variation1<-round((resume[,6]-resume[,3])*100/resume[,3],2)
-    resume$Hect2<-round((xha[,2]/100)*resume[,7],2)
+    resume$Hect2<-round((xha[,2]/100)*resume[,7],4)
     ################################################################################
     #Ciclos automaticos >3
     ################################################################################
@@ -118,12 +120,18 @@ multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
       variation <- paste0("variation",(i-1))
       resume[variation]<-round(((resume[,(ncol(resume)-1)])-(resume[,(ncol(resume)-5)]))*100/(resume[,(ncol(resume)-5)]),2)
       hect1<-paste0("hect",i)
-      resume[hect1]<-round((xha[,2]/100)*resume[,(ncol(resume)-1)],2)
+      resume[hect1]<-round((xha[,2]/100)*resume[,(ncol(resume)-1)],4)
     }
     if (!is.null(ID1)) {resume[,1]<-ID1}
+    z1<-resume
+    variation0<-rep(0, length(t(z1[3])))
+    resume <- cbind(z1[,1:4], variation0, z1[, 5:(length(z1))])
     resume_list[[z]] <- resume
+  
   }
   }
   resume_list
+
+  
 }
-#########################################################################
+}
