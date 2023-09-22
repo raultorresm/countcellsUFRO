@@ -10,6 +10,12 @@
 #package required "hydroRTS"
 #########################################################################
 multicountcells <- function(x1,y,category=NULL,ID1=NULL,unit="ha") {
+
+if(is(y,"SpatVectorCollection")){
+    
+  }else{
+    y <- c(y)
+  }
   
   resume_list <-list()
  
